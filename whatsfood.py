@@ -3,6 +3,8 @@ from datetime import datetime
 import requests, argparse,os
 
 
+#config
+mensa="Leopoldstraße 13a, München"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-d','--date', help='use date instead of today - format: Y-M-D')
@@ -20,7 +22,7 @@ def whatsfood(fdate):
 
         soup = BeautifulSoup(page.content, 'html.parser')
         try:
-            result=soup.find("p", text="Leopoldstraße 13a, München").parent.find(class_=fdate).parent.findAll(class_="c-schedule__list-item")
+            result=soup.find("p", text=mensa).parent.find(class_=fdate).parent.findAll(class_="c-schedule__list-item")
             if len(result)>0:
                 for r in result:
                     res=r.find(class_="js-schedule-dish-description")
